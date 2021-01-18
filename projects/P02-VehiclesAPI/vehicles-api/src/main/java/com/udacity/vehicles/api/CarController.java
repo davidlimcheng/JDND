@@ -84,8 +84,10 @@ class CarController {
      */
     @PutMapping("/{id}")
     ResponseEntity<?> put(@PathVariable Long id, @Valid @RequestBody Car car) {
-        Resource<Car> resource = assembler.toResource(new Car());
-        return ResponseEntity.ok(resource);
+        car.setId(id);
+        carService.save(car);
+
+        return ResponseEntity.ok("Car successfully updated.");
     }
 
     /**
